@@ -1,0 +1,9 @@
+/* Ensure toastr always on top of navbars/modals */
+#toast-container,
+.fl-wrapper {
+    z-index: 99999 !important;
+}
+
+#toast-container > div {
+    margin-top: 70px; /* adjust to your navbar height */
+}

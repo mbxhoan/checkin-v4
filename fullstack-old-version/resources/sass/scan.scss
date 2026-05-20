@@ -1,0 +1,15 @@
+.scan-body {
+    margin-top: var(--navbar-base-web-height);
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Scan pages do not use the admin sidebar layout, but we still import app.scss in scan layout.
+ * app.scss defines `.main-content { margin-left: $sidebar-width; }` which shifts the whole scan UI.
+ * Override it here so the drag/drop preview and the real scan screen share the same coordinate system.
+ */
+body .main-content {
+    margin-left: 0 !important;
+}

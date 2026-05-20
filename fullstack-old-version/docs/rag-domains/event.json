@@ -1,0 +1,1916 @@
+{
+  "domain": "event",
+  "description": "Event operations and runtime management.",
+  "generated_at_utc": "2026-02-25T06:54:37.841602+00:00",
+  "source": {
+    "type": "sqlite_from_laravel_migrations",
+    "database_path": "<temporary sqlite build>",
+    "notes": [
+      "Schema generated from top-level files in database/migrations.",
+      "database/migrations/tmp is intentionally excluded (Laravel default behavior).",
+      "Temporary migration copy was normalized for SQLite index compatibility only."
+    ]
+  },
+  "tables": [
+    {
+      "name": "checkins",
+      "kind": "domain",
+      "description": "Check-in logs per event and operator.",
+      "column_count": 14,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "event_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "user_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "qrcode",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "client_name",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "source",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "scan_time",
+          "type": "datetime",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "note",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'NEW'",
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "custom_fields",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "event_code",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "type",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'CHECKIN'",
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "user_id",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "CASCADE"
+        },
+        {
+          "from_column": "event_id",
+          "to_table": "events",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "CASCADE"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "checkins_user_id_index",
+          "is_unique": false,
+          "columns": [
+            "user_id"
+          ]
+        },
+        {
+          "name": "checkins_event_id_index",
+          "is_unique": false,
+          "columns": [
+            "event_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "custom_field_templates",
+      "kind": "domain",
+      "description": "Template for dynamic form fields.",
+      "column_count": 22,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "event_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "is_default",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "is_show",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "is_lp",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "is_checkin_mobile",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "is_checkin_desktop",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "show_prefix",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "required",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "unique",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "description",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "placeholder",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "icon",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "order",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "type",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'TEXT'",
+          "is_primary_key": false
+        },
+        {
+          "name": "accepts",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "options",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "checkins",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "landing_page",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "event_id",
+          "to_table": "events",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "custom_field_templates_event_id_name_unique",
+          "is_unique": true,
+          "columns": [
+            "event_id",
+            "name"
+          ]
+        },
+        {
+          "name": "custom_field_templates_event_id_index",
+          "is_unique": false,
+          "columns": [
+            "event_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "event_areas",
+      "kind": "domain",
+      "description": "Event area catalog.",
+      "column_count": 8,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "event_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "client_types",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "description",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "note",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": []
+    },
+    {
+      "name": "event_file_logs",
+      "kind": "domain",
+      "description": "Business domain table: event file logs.",
+      "column_count": 8,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "event_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "event_code",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "path",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "type",
+          "type": "varchar",
+          "nullable": true,
+          "default": "'FILE'",
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": []
+    },
+    {
+      "name": "event_files",
+      "kind": "domain",
+      "description": "Business domain table: event files.",
+      "column_count": 10,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "event_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "media_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "file_path",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "is_public",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": "'1'",
+          "is_primary_key": false
+        },
+        {
+          "name": "type",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'FILE'",
+          "is_primary_key": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'ACTIVE'",
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "media_id",
+          "to_table": "media",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "SET NULL"
+        },
+        {
+          "from_column": "event_id",
+          "to_table": "events",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "event_files_file_path_unique",
+          "is_unique": true,
+          "columns": [
+            "file_path"
+          ]
+        },
+        {
+          "name": "event_files_media_id_index",
+          "is_unique": false,
+          "columns": [
+            "media_id"
+          ]
+        },
+        {
+          "name": "event_files_event_id_index",
+          "is_unique": false,
+          "columns": [
+            "event_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "event_settings",
+      "kind": "domain",
+      "description": "Hierarchical settings per event.",
+      "column_count": 12,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "parent_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "event_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "description",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "value",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "options",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "group",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "input_type",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'text'",
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'ACTIVE'",
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "parent_id",
+          "to_table": "event_settings",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "event_id",
+          "to_table": "events",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "event_settings_event_id_name_group_unique",
+          "is_unique": true,
+          "columns": [
+            "event_id",
+            "name",
+            "group"
+          ]
+        },
+        {
+          "name": "event_settings_parent_id_index",
+          "is_unique": false,
+          "columns": [
+            "parent_id"
+          ]
+        },
+        {
+          "name": "event_settings_event_id_index",
+          "is_unique": false,
+          "columns": [
+            "event_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "event_types",
+      "kind": "domain",
+      "description": "Event type catalog.",
+      "column_count": 6,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "title",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "description",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": []
+    },
+    {
+      "name": "events",
+      "kind": "domain",
+      "description": "Core event entity and runtime configuration.",
+      "column_count": 35,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "company_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "code",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "description",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "place",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "features",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "languages",
+          "type": "TEXT",
+          "nullable": false,
+          "default": "JSON_ARRAY()",
+          "is_primary_key": false
+        },
+        {
+          "name": "main_bg_mobile",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "contact_person",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "contact_phone",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "contact_email",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "note",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'ACTIVE'",
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "more_images",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "main_bg_desktop",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "main_bglandingpage_desktop",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "main_bglandingpage_mobile",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "sound_success",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "sound_fail",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "custom_checkin_messages",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "is_default",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "logo",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "favicon",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "from_date",
+          "type": "date",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "to_date",
+          "type": "date",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_by",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_by",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "import_error_log",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "province_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "ref_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "type_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "assignee_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "assignee_id",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "SET NULL"
+        },
+        {
+          "from_column": "type_id",
+          "to_table": "event_types",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "SET NULL"
+        },
+        {
+          "from_column": "updated_by",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "created_by",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "company_id",
+          "to_table": "companys",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "province_id",
+          "to_table": "provinces",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "SET NULL"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "events_assignee_id_index",
+          "is_unique": false,
+          "columns": [
+            "assignee_id"
+          ]
+        },
+        {
+          "name": "events_type_id_index",
+          "is_unique": false,
+          "columns": [
+            "type_id"
+          ]
+        },
+        {
+          "name": "events_province_id_index",
+          "is_unique": false,
+          "columns": [
+            "province_id"
+          ]
+        },
+        {
+          "name": "events_company_id_index",
+          "is_unique": false,
+          "columns": [
+            "company_id"
+          ]
+        },
+        {
+          "name": "events_code_index",
+          "is_unique": false,
+          "columns": [
+            "code"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "export_datas",
+      "kind": "domain",
+      "description": "Business domain table: export datas.",
+      "column_count": 10,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "event_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "user_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "file_path",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'EXPORTED'",
+          "is_primary_key": false
+        },
+        {
+          "name": "type",
+          "type": "varchar",
+          "nullable": true,
+          "default": "'EXPORT_CLIENT'",
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "file_name",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "user_id",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "event_id",
+          "to_table": "events",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "export_datas_user_id_index",
+          "is_unique": false,
+          "columns": [
+            "user_id"
+          ]
+        },
+        {
+          "name": "export_datas_event_id_index",
+          "is_unique": false,
+          "columns": [
+            "event_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "impexp_files",
+      "kind": "domain",
+      "description": "Business domain table: impexp files.",
+      "column_count": 12,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "event_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "table",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "file_path",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "total_record_before",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "total_record",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "error_log",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "type",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'IMPORT'",
+          "is_primary_key": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'NEW'",
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "event_id",
+          "to_table": "events",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "impexp_files_event_id_index",
+          "is_unique": false,
+          "columns": [
+            "event_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "page_access_logs",
+      "kind": "domain",
+      "description": "Business domain table: page access logs.",
+      "column_count": 7,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "lp_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "page",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "ip_address",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "user_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "page_access_logs_page_index",
+          "is_unique": false,
+          "columns": [
+            "page"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "persons",
+      "kind": "domain",
+      "description": "Business domain table: persons.",
+      "column_count": 15,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "event_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "event_code",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "company_name",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "code",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "gender",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "title",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "email",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "phone",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "type",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": true,
+          "default": "'ACTIVE'",
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "img_qrcode",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "event_id",
+          "to_table": "events",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "persons_event_id_index",
+          "is_unique": false,
+          "columns": [
+            "event_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "provinces",
+      "kind": "domain",
+      "description": "Province/state catalog.",
+      "column_count": 5,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "is_default",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": []
+    },
+    {
+      "name": "summerizes",
+      "kind": "domain",
+      "description": "Business domain table: summerizes.",
+      "column_count": 8,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "events",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "clients",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'ACTIVE'",
+          "is_primary_key": false
+        },
+        {
+          "name": "created_by",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_by",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "updated_by",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "created_by",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        }
+      ],
+      "indexes": []
+    }
+  ],
+  "relationships": [
+    {
+      "from_table": "campaign_attachments",
+      "from_column": "event_file_id",
+      "to_table": "event_files",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "campaigns",
+      "from_column": "event_id",
+      "to_table": "events",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "checkins",
+      "from_column": "user_id",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "CASCADE"
+    },
+    {
+      "from_table": "checkins",
+      "from_column": "event_id",
+      "to_table": "events",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "CASCADE"
+    },
+    {
+      "from_table": "client_tickets",
+      "from_column": "event_id",
+      "to_table": "events",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "clients",
+      "from_column": "event_id",
+      "to_table": "events",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "custom_field_templates",
+      "from_column": "event_id",
+      "to_table": "events",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "event_files",
+      "from_column": "media_id",
+      "to_table": "media",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "SET NULL"
+    },
+    {
+      "from_table": "event_files",
+      "from_column": "event_id",
+      "to_table": "events",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "event_settings",
+      "from_column": "parent_id",
+      "to_table": "event_settings",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "event_settings",
+      "from_column": "event_id",
+      "to_table": "events",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "events",
+      "from_column": "assignee_id",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "SET NULL"
+    },
+    {
+      "from_table": "events",
+      "from_column": "type_id",
+      "to_table": "event_types",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "SET NULL"
+    },
+    {
+      "from_table": "events",
+      "from_column": "updated_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "events",
+      "from_column": "created_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "events",
+      "from_column": "company_id",
+      "to_table": "companys",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "events",
+      "from_column": "province_id",
+      "to_table": "provinces",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "SET NULL"
+    },
+    {
+      "from_table": "export_datas",
+      "from_column": "user_id",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "export_datas",
+      "from_column": "event_id",
+      "to_table": "events",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "impexp_files",
+      "from_column": "event_id",
+      "to_table": "events",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "labels",
+      "from_column": "event_id",
+      "to_table": "events",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "landing_pages",
+      "from_column": "event_id",
+      "to_table": "events",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "language_defines",
+      "from_column": "event_id",
+      "to_table": "events",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "lucky_draws",
+      "from_column": "event_id",
+      "to_table": "events",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "persons",
+      "from_column": "event_id",
+      "to_table": "events",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "printers",
+      "from_column": "event_id",
+      "to_table": "events",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "smss",
+      "from_column": "event_id",
+      "to_table": "events",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "summerizes",
+      "from_column": "updated_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "summerizes",
+      "from_column": "created_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "users",
+      "from_column": "event_id",
+      "to_table": "events",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "SET NULL"
+    }
+  ],
+  "external_reference_tables": [
+    "campaign_attachments",
+    "campaigns",
+    "client_tickets",
+    "clients",
+    "companys",
+    "labels",
+    "landing_pages",
+    "language_defines",
+    "lucky_draws",
+    "media",
+    "printers",
+    "smss",
+    "users"
+  ],
+  "stats": {
+    "table_count": 14,
+    "relationship_count": 30,
+    "column_count": 172
+  }
+}

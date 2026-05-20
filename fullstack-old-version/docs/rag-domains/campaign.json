@@ -1,0 +1,1375 @@
+{
+  "domain": "campaign",
+  "description": "Campaign, communication, and outbound messaging.",
+  "generated_at_utc": "2026-02-25T06:54:37.841602+00:00",
+  "source": {
+    "type": "sqlite_from_laravel_migrations",
+    "database_path": "<temporary sqlite build>",
+    "notes": [
+      "Schema generated from top-level files in database/migrations.",
+      "database/migrations/tmp is intentionally excluded (Laravel default behavior).",
+      "Temporary migration copy was normalized for SQLite index compatibility only."
+    ]
+  },
+  "tables": [
+    {
+      "name": "api_client_logs",
+      "kind": "domain",
+      "description": "Business domain table: api client logs.",
+      "column_count": 9,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "method",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "endpoint",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "request",
+          "type": "TEXT",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "response",
+          "type": "TEXT",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "user_agent",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'NEW'",
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": []
+    },
+    {
+      "name": "campaign_attachments",
+      "kind": "domain",
+      "description": "Business domain table: campaign attachments.",
+      "column_count": 9,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "event_file_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "file_path",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "mime",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_by",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_by",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "updated_by",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "created_by",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "event_file_id",
+          "to_table": "event_files",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "campaign_attachments_updated_by_index",
+          "is_unique": false,
+          "columns": [
+            "updated_by"
+          ]
+        },
+        {
+          "name": "campaign_attachments_created_by_index",
+          "is_unique": false,
+          "columns": [
+            "created_by"
+          ]
+        },
+        {
+          "name": "campaign_attachments_event_file_id_index",
+          "is_unique": false,
+          "columns": [
+            "event_file_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "campaign_details",
+      "kind": "domain",
+      "description": "Detailed campaign configuration rows.",
+      "column_count": 18,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "campaign_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "tag_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "qrcode",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "gender",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "email",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "phone",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "send_email",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "send_zalo",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "send_sms",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "img_qrcode",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "custom_fields",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "email_form",
+          "type": "tinyint(1)",
+          "nullable": true,
+          "default": "'1'",
+          "is_primary_key": false
+        },
+        {
+          "name": "document_pdf",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "tag_id",
+          "to_table": "tags",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "campaign_id",
+          "to_table": "campaigns",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "campaign_details_tag_id_index",
+          "is_unique": false,
+          "columns": [
+            "tag_id"
+          ]
+        },
+        {
+          "name": "campaign_details_campaign_id_index",
+          "is_unique": false,
+          "columns": [
+            "campaign_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "campaigns",
+      "kind": "domain",
+      "description": "Campaigns linked to events.",
+      "column_count": 21,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "event_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "type",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "template_id",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'email-template-default'",
+          "is_primary_key": false
+        },
+        {
+          "name": "total_emails",
+          "type": "numeric",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "subject",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "from_email",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "from_name",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "cc",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "bcc",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "fixed_attachments",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": "'1'",
+          "is_primary_key": false
+        },
+        {
+          "name": "created_by",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_by",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "limitation_per_time",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": "'15'",
+          "is_primary_key": false
+        },
+        {
+          "name": "hold_time",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": "'10'",
+          "is_primary_key": false
+        },
+        {
+          "name": "is_online",
+          "type": "tinyint(1)",
+          "nullable": true,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "message_stream",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'outbound'",
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "updated_by",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "created_by",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "event_id",
+          "to_table": "events",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "campaigns_updated_by_index",
+          "is_unique": false,
+          "columns": [
+            "updated_by"
+          ]
+        },
+        {
+          "name": "campaigns_created_by_index",
+          "is_unique": false,
+          "columns": [
+            "created_by"
+          ]
+        },
+        {
+          "name": "campaigns_event_id_index",
+          "is_unique": false,
+          "columns": [
+            "event_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "email_templates",
+      "kind": "domain",
+      "description": "Business domain table: email templates.",
+      "column_count": 12,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "ref_id",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "uuid",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "subject",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "banner",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "footer",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "texts",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "html",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": true,
+          "default": "'ACTIVE'",
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "email_templates_uuid_unique",
+          "is_unique": true,
+          "columns": [
+            "uuid"
+          ]
+        },
+        {
+          "name": "email_templates_uuid_index",
+          "is_unique": false,
+          "columns": [
+            "uuid"
+          ]
+        },
+        {
+          "name": "email_templates_ref_id_index",
+          "is_unique": false,
+          "columns": [
+            "ref_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "emails",
+      "kind": "domain",
+      "description": "Outbound email records for clients/campaigns.",
+      "column_count": 21,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "campaign_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "subject",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "email",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "content",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "sent_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "from_name",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "from_email",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "to_name",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "to_email",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "param",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "template_id",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "supplier",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "is_online",
+          "type": "tinyint(1)",
+          "nullable": true,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "error_log",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "qrcode",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "message_id",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "server_response",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "campaign_id",
+          "to_table": "campaigns",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "emails_qrcode_index",
+          "is_unique": false,
+          "columns": [
+            "qrcode"
+          ]
+        },
+        {
+          "name": "emails_campaign_id_index",
+          "is_unique": false,
+          "columns": [
+            "campaign_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "historys",
+      "kind": "domain",
+      "description": "Business domain table: historys.",
+      "column_count": 10,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "user_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "action",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "object",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "function",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "method",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "parameters",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "error",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "historys_user_id_index",
+          "is_unique": false,
+          "columns": [
+            "user_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "newsletter_subscriptions",
+      "kind": "domain",
+      "description": "Business domain table: newsletter subscriptions.",
+      "column_count": 4,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "email",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "newsletter_subscriptions_email_unique",
+          "is_unique": true,
+          "columns": [
+            "email"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "smss",
+      "kind": "domain",
+      "description": "Outbound SMS records for clients/events.",
+      "column_count": 7,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "event_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "client_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "send_time",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'NEW'",
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "client_id",
+          "to_table": "clients",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "event_id",
+          "to_table": "events",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "smss_client_id_index",
+          "is_unique": false,
+          "columns": [
+            "client_id"
+          ]
+        },
+        {
+          "name": "smss_event_id_index",
+          "is_unique": false,
+          "columns": [
+            "event_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tags",
+      "kind": "domain",
+      "description": "Business domain table: tags.",
+      "column_count": 5,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": []
+    },
+    {
+      "name": "webhook_postmarks",
+      "kind": "domain",
+      "description": "Inbound Postmark webhook events.",
+      "column_count": 15,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "ip_address",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "server_id",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "message_id",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "message_stream",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "email",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "tag",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "details",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "record_time",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "metadata",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "response",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "email_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "webhook_postmarks_server_id_index",
+          "is_unique": false,
+          "columns": [
+            "server_id"
+          ]
+        },
+        {
+          "name": "webhook_postmarks_email_index",
+          "is_unique": false,
+          "columns": [
+            "email"
+          ]
+        },
+        {
+          "name": "webhook_postmarks_message_id_index",
+          "is_unique": false,
+          "columns": [
+            "message_id"
+          ]
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "from_table": "campaign_attachments",
+      "from_column": "updated_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "campaign_attachments",
+      "from_column": "created_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "campaign_attachments",
+      "from_column": "event_file_id",
+      "to_table": "event_files",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "campaign_details",
+      "from_column": "tag_id",
+      "to_table": "tags",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "campaign_details",
+      "from_column": "campaign_id",
+      "to_table": "campaigns",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "campaigns",
+      "from_column": "updated_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "campaigns",
+      "from_column": "created_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "campaigns",
+      "from_column": "event_id",
+      "to_table": "events",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "emails",
+      "from_column": "campaign_id",
+      "to_table": "campaigns",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "smss",
+      "from_column": "client_id",
+      "to_table": "clients",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "smss",
+      "from_column": "event_id",
+      "to_table": "events",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    }
+  ],
+  "external_reference_tables": [
+    "clients",
+    "event_files",
+    "events",
+    "users"
+  ],
+  "stats": {
+    "table_count": 11,
+    "relationship_count": 11,
+    "column_count": 131
+  }
+}

@@ -1,0 +1,724 @@
+{
+  "name": "RAG in n8n - Delfi Checkin",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Upload your data to test RAG",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Upload your file(s)",
+              "fieldType": "file",
+              "acceptFileTypes": ".pdf, .csv",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -128,
+        0
+      ],
+      "id": "26653f65-7c38-41e0-9dae-d03961343657",
+      "name": "Upload your file here",
+      "webhookId": "60194a25-ce46-4699-94a9-195a964780f5"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        528,
+        480
+      ],
+      "id": "fbcf4d68-dd09-4473-94eb-1c1f0bbbe6c2",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "rdmzKKVdNqkeaXeW",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        320,
+        160
+      ],
+      "id": "d271571f-9c47-4503-9008-da529c9233a0",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "content": "### Readme\nLoad your data into a vector database with the 📚 **Load Data** flow, and then use your data as chat context with the 🐕 **Retriever** flow.\n\n**Quick start**\n1. Click on the `Execute Workflow` button to run the 📚 **Load Data** flow.\n2. Click on `Open Chat` button to run the 🐕 **Retriever** flow. Then ask a question about content from your document(s)\n\n\nFor more info, check [our docs on RAG in n8n](https://docs.n8n.io/advanced-ai/rag-in-n8n/).",
+        "height": 300,
+        "width": 440,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -656,
+        -64
+      ],
+      "typeVersion": 1,
+      "id": "941be732-a8b6-49ce-a699-4340d219bd1c",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "### 📚 Load Data Flow",
+        "height": 460,
+        "width": 700,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -176,
+        -64
+      ],
+      "typeVersion": 1,
+      "id": "efb0aaf6-4f98-45a9-9264-25584a4c1ff6",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "memoryKey": {
+          "__rl": true,
+          "value": "vector_store_key",
+          "mode": "list",
+          "cachedResultName": "vector_store_key"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.2,
+      "position": [
+        96,
+        0
+      ],
+      "id": "67d93de5-89da-48d5-aaf9-1ddfad1c7a30",
+      "name": "Insert Data to Store"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolName": "knowledge_base",
+        "toolDescription": "Use this knowledge base to answer questions from the user",
+        "memoryKey": {
+          "__rl": true,
+          "value": "vector_store_key",
+          "mode": "list",
+          "cachedResultName": "vector_store_key"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.2,
+      "position": [
+        1024,
+        176
+      ],
+      "id": "df5ade3d-69ef-478f-9e25-6f8b00dfcd60",
+      "name": "Query Data Tool"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a helpful & friendly assistant! Response only in Vietnamese. You understand process from our embedded documents and give accurate ideas for customers.\nOnly provide information relevant to the document; if it's outside that scope, state that you cannot assist."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        912,
+        -16
+      ],
+      "id": "be397f30-14ef-4972-8752-6433bcd6655c",
+      "name": "AI Agent",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        704,
+        -16
+      ],
+      "id": "9db015bc-de10-43d8-81b5-d943dd566eed",
+      "name": "When chat message received",
+      "webhookId": "5ee922ba-c63c-45bc-82c6-467a920aa53a"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        800,
+        176
+      ],
+      "id": "55a7595d-21a9-4faf-8da8-f0dcac21a276",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "rdmzKKVdNqkeaXeW",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "### 🐕 2. Retriever Flow",
+        "height": 460,
+        "width": 680,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        624,
+        -64
+      ],
+      "typeVersion": 1,
+      "id": "c7ae1cda-ac78-457d-9bc9-4cb5e6df0c6d",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "### Embeddings\n\nThe Insert and Retrieve operation use the same embedding node.\n\nThis is to ensure that they are using the **exact same embeddings and settings**.\n\nDifferent embeddings might not work at all, or have unintended consequences.\n",
+        "height": 240,
+        "width": 320,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        672,
+        448
+      ],
+      "typeVersion": 1,
+      "id": "9fb1c54f-3188-4dd8-82a5-fc9ede8a590f",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "send-message",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        704,
+        -240
+      ],
+      "id": "0f331b60-5684-4e99-aedb-260c7781fb83",
+      "name": "Webhook",
+      "webhookId": "88d2d827-bf4c-4073-af81-30747e84e7a1"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $('AI Agent For Webhook (Default)').item.json.toJsonString() }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        1776,
+        -480
+      ],
+      "id": "22deee6b-f3d1-4f88-9c48-4b9a8b1f4374",
+      "name": "Respond to Webhook",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n    \"output\": \"Error in workflow API\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        2096,
+        -96
+      ],
+      "id": "711c672f-e6c1-4e37-8485-8b8291c35c7f",
+      "name": "Respond Error"
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "mode": "id",
+            "value": "1ZtqG52-KOkwkKa2Mr9uYvItjy_AKIXR2"
+          },
+          "whatToSearch": "files"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -352,
+        -336
+      ],
+      "id": "c801ba55-7271-48a6-96dd-16ef5fb64871",
+      "name": "Search files and folders",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "D7nOXFSG84joBbOw",
+          "name": "Google Auth - Delfi Admin (admin@delfi.vn)"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        -336
+      ],
+      "id": "c90233be-1125-47cb-b44d-cc78b36f2866",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -144,
+        -336
+      ],
+      "id": "20c90615-389b-40ae-9a5f-2c1b38136877",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "D7nOXFSG84joBbOw",
+          "name": "Google Auth - Delfi Admin (admin@delfi.vn)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyHour"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "mode": "id",
+          "value": "1ZtqG52-KOkwkKa2Mr9uYvItjy_AKIXR2"
+        },
+        "event": "fileUpdated",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        -512
+      ],
+      "id": "0d3098ee-db03-450c-8fdd-156995c26905",
+      "name": "Google Drive Trigger",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "D7nOXFSG84joBbOw",
+          "name": "Google Auth - Delfi Admin (admin@delfi.vn)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "### 📚 Google Drive Triggers",
+        "height": 460,
+        "width": 700,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -640,
+        -592
+      ],
+      "typeVersion": 1,
+      "id": "ca70c3d2-0b44-4fd4-b932-eaad739b305a",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.body.message }}",
+        "options": {
+          "systemMessage": "You are a helpful & friendly assistant! Response only in Vietnamese. You understand process from our embedded documents and give accurate ideas for customers.\nOnly provide information relevant to the document; if it's outside that scope, state that you cannot assist."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        912,
+        -448
+      ],
+      "id": "95e9b529-c40c-4c87-81ea-dd5de2ff0147",
+      "name": "AI Agent For Webhook (Default)",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Tin nhắn mới của user:\n{{ $json.body.message }}\n\nSession mode:\n{{ $json.body.session_mode }}\n\nUser context:\n{{ $json.body.user_context.toJsonString() }}\n\nMemory context:\n{{ $json.body.memory_context.toJsonString() }}\n\nHistory phiên hiện tại:\n{{ $json.body.history.toJsonString() }}\n\nCross-session history:\n{{ $json.body.cross_session_history.toJsonString() }}",
+        "options": {
+          "systemMessage": "Với RAG, bạn hiểu rõ quy trình từ các tài liệu đính kèm của chúng tôi và đưa ra những ý kiến ​​chính xác cho khách hàng. Bạn là CHECKIN AI AGENT, trợ lý cá nhân hóa cho từng người dùng trong hệ thống checkin event.\nMục tiêu:\n1. Trả lời bằng tiếng Việt có dấu, rõ ràng, nhất quán.\n2. Chỉ cung cấp thông tin liên quan đến tài liệu, nếu nằm ngoài phạm vi đó, hãy nêu rõ rằng bạn không thể hỗ trợ.\n3. Không truy vấn DB trực tiếp. Chỉ dùng các tool được cấp (ví dụ: Query Data Tool).\n4. Tôn trọng phân quyền dữ liệu theo user_context.\n5. Tận dụng lịch sử và bộ nhớ để giữ ngữ cảnh xuyên phiên chat.\n\nNguồn dữ liệu đầu vào:\n- Embeddings OpenAI: RAG tài liệu về ứng dụng đã được lập trình sẵn\n- message: câu hỏi hiện tại của người dùng\n- session_mode: GUIDE hoặc REPORT\n- user_context: thông tin user, role, company/event scope\n- memory_context.last_report_template: mẫu báo cáo gần nhất của user\n- memory_context.recent_report_templates: các mẫu báo cáo gần đây\n- history: hội thoại phiên hiện tại\n- cross_session_history: hội thoại gần đây xuyên nhiều phiên\n\nQuy tắc phân quyền:\n1. Nếu user_context.role_scope.is_system_admin = true: được xem toàn hệ thống.\n2. Nếu user_context.role_scope.is_company_admin = true: chỉ dữ liệu trong company_id của user.\n3. Nếu không thuộc 2 nhóm trên: chỉ dữ liệu trong event_id được phân quyền.\n4. Nếu không xác định được quyền, từ chối lịch sự và yêu cầu xác minh.\n\nQuy tắc cá nhân hóa và nhất quán:\n1. Nếu câu hỏi có ý “tương tự”, “như hôm trước”, “như lần trước”, “xuất lại”, “y như cũ” thì ưu tiên tái sử dụng memory_context.last_report_template.\n2. Khi người dùng thêm điều kiện mới (ví dụ: “thêm doanh thu”), giữ template cũ và chỉ merge phần mới.\n3. Nếu câu hỏi mơ hồ, hỏi lại đúng 1 câu ngắn để chốt tham số còn thiếu.\n4. Nếu có template cũ phù hợp, ưu tiên dùng template đó trước khi suy luận mới.\n\nQuy tắc nghiệp vụ báo cáo:\n1. Nhóm Báo cáo nhanh: số sự kiện đang chạy, số khách theo sự kiện.\n2. Nhóm Thống kê: theo tháng, tháng trước/tháng kia, nhiều tháng.\n3. Nhóm Báo cáo tổng hợp: theo năm, top event, xu hướng.\n4. Nếu có từ khóa doanh thu (doanh thu/revenue/tổng thu/thêm doanh thu), bật chế độ include_revenue.\n\nKhi người dùng báo lỗi hoặc sự cố:\n1. Không được đoán nguyên nhân ngay.\n2. Phải yêu cầu thêm thông tin nếu thiếu dữ liệu.\n3. Hỏi tối đa 2–3 câu quan trọng nhất.\n4. Sau khi có đủ thông tin:\n   - Phân tích nguyên nhân có thể xảy ra\n   - Nếu có tool kiểm tra → phải gọi tool\n   - Nếu không giải quyết được → đề xuất tạo ticket\n5. Không tự tạo thông tin giả.\n\nQuy tắc dùng tool:\n1. Chỉ gọi tool khi cần dữ liệu thật.\n2. Không bịa dữ liệu.\n3. Nếu tool lỗi hoặc thiếu dữ liệu, nêu rõ giới hạn và đưa cách hỏi thay thế.\n\nĐịnh dạng phản hồi bắt buộc:\n- Trả về JSON object.\n- Luôn có trường \"output\" là markdown có xuống dòng.\n- Có thể thêm \"meta\" để debug nội bộ.\n\nMẫu output:\n{\n  \"output\": \"Nội dung trả lời markdown...\",\n  \"meta\": {\n    \"intent\": \"running_events|clients_by_event|monthly_statistics|yearly_report|guide\",\n    \"used_memory_template\": true,\n    \"include_revenue\": false,\n    \"scope\": \"system|company|event\"\n  }\n}\n\nBổ sung output nâng cao:\n- Nếu phù hợp, trả thêm `actions` (array) để UI tạo nút thao tác nhanh.\n- Với action tải file: `{ \"action\": \"open_url\", \"label\": \"Tải file\", \"url\": \"https://...\" }`\n- Với action gợi ý câu hỏi: `{ \"action\": \"send_preset\", \"label\": \"Thử câu hỏi\", \"message\": \"...\" }`\n- Với action sao chép: `{ \"action\": \"copy_text\", \"label\": \"Copy\", \"text\": \"...\" }`\n- Nếu có biểu đồ, trả thêm `charts` theo cấu trúc đang dùng trong frontend."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        912,
+        -240
+      ],
+      "id": "0459c29c-6975-4115-a414-1052d8093161",
+      "name": "AI Agent For Webhook (Updated from Codex)",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        1776,
+        -320
+      ],
+      "id": "2714da0c-9d5d-4806-a07b-9413580517ca",
+      "name": "Respond Object",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "operation": "fromJson",
+        "binaryPropertyName": "output",
+        "destinationKey": "output",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        1504,
+        -464
+      ],
+      "id": "94b68a8a-4e05-41ec-a452-65d848a3b09b",
+      "name": "Extract from File",
+      "alwaysOutputData": true,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        1280,
+        -320
+      ],
+      "id": "b91f8a92-7529-4d5a-838c-a134ad0127cd",
+      "name": "Respond Output",
+      "onError": "continueErrorOutput"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Upload your file here": {
+      "main": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "ai_embedding",
+            "index": 0
+          },
+          {
+            "node": "Query Data Tool",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Query Data Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          },
+          {
+            "node": "AI Agent For Webhook (Updated from Codex)",
+            "type": "ai_tool",
+            "index": 0
+          },
+          {
+            "node": "AI Agent For Webhook (Default)",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "AI Agent For Webhook (Updated from Codex)",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "AI Agent For Webhook (Default)",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent For Webhook (Updated from Codex)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [],
+        []
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Search files and folders",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search files and folders": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Trigger": {
+      "main": [
+        [
+          {
+            "node": "Search files and folders",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent For Webhook (Updated from Codex)": {
+      "main": [
+        [
+          {
+            "node": "Respond Output",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond Object": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Respond Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Respond Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent For Webhook (Default)": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond Object",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond Output": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Respond Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "794a0260-622b-4d64-96ea-4e8afb19ec1c",
+  "meta": {
+    "templateId": "rag-starter-template",
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c7f40cce087dce50e7185f243d1cfa3fe3218c7dd74b1979821f0ff5b628d5f2"
+  },
+  "id": "THnSaBUU5IMBPu8n",
+  "tags": []
+}

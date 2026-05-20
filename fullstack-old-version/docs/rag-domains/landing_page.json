@@ -1,0 +1,725 @@
+{
+  "domain": "landing_page",
+  "description": "Landing page builder and content blocks.",
+  "generated_at_utc": "2026-02-25T06:54:37.841602+00:00",
+  "source": {
+    "type": "sqlite_from_laravel_migrations",
+    "database_path": "<temporary sqlite build>",
+    "notes": [
+      "Schema generated from top-level files in database/migrations.",
+      "database/migrations/tmp is intentionally excluded (Laravel default behavior).",
+      "Temporary migration copy was normalized for SQLite index compatibility only."
+    ]
+  },
+  "tables": [
+    {
+      "name": "audios",
+      "kind": "domain",
+      "description": "Business domain table: audios.",
+      "column_count": 11,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "company_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "code",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "text",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "voice",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'alloy'",
+          "is_primary_key": false
+        },
+        {
+          "name": "file_path",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "link",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_by",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_by",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "updated_by",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "created_by",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "company_id",
+          "to_table": "companys",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "audios_code_unique",
+          "is_unique": true,
+          "columns": [
+            "code"
+          ]
+        },
+        {
+          "name": "audios_updated_by_index",
+          "is_unique": false,
+          "columns": [
+            "updated_by"
+          ]
+        },
+        {
+          "name": "audios_created_by_index",
+          "is_unique": false,
+          "columns": [
+            "created_by"
+          ]
+        },
+        {
+          "name": "audios_company_id_index",
+          "is_unique": false,
+          "columns": [
+            "company_id"
+          ]
+        },
+        {
+          "name": "audios_code_index",
+          "is_unique": false,
+          "columns": [
+            "code"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "landing_page_campaigns",
+      "kind": "domain",
+      "description": "Campaign blocks on landing pages.",
+      "column_count": 7,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "landing_page_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "campaign_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "lang",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "deleted_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "landing_page_campaigns_campaign_id_index",
+          "is_unique": false,
+          "columns": [
+            "campaign_id"
+          ]
+        },
+        {
+          "name": "landing_page_campaigns_landing_page_id_index",
+          "is_unique": false,
+          "columns": [
+            "landing_page_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "landing_page_cards",
+      "kind": "domain",
+      "description": "Card/content blocks on landing pages.",
+      "column_count": 7,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "landing_page_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "card_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "lang",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "deleted_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "landing_page_cards_card_id_index",
+          "is_unique": false,
+          "columns": [
+            "card_id"
+          ]
+        },
+        {
+          "name": "landing_page_cards_landing_page_id_index",
+          "is_unique": false,
+          "columns": [
+            "landing_page_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "landing_pages",
+      "kind": "domain",
+      "description": "Landing page configuration per event.",
+      "column_count": 28,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "template_id",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'1'",
+          "is_primary_key": false
+        },
+        {
+          "name": "event_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "show_language_selection",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "slug",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "trackings",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "customs",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "orders",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "align",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'center'",
+          "is_primary_key": false
+        },
+        {
+          "name": "form_width",
+          "type": "varchar",
+          "nullable": true,
+          "default": "'1'",
+          "is_primary_key": false
+        },
+        {
+          "name": "font",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "languages",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "banner_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "header_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "footer_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "bg_desktop_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "bg_tablet_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "bg_mobile_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "contact_name",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "contact_phone",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "contact_email",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "contact_address",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'NEW'",
+          "is_primary_key": false
+        },
+        {
+          "name": "created_by",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_by",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "deleted_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "updated_by",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "created_by",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "bg_mobile_id",
+          "to_table": "media",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "bg_tablet_id",
+          "to_table": "media",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "bg_desktop_id",
+          "to_table": "media",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "footer_id",
+          "to_table": "media",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "header_id",
+          "to_table": "media",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "banner_id",
+          "to_table": "media",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "event_id",
+          "to_table": "events",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "landing_pages_slug_unique",
+          "is_unique": true,
+          "columns": [
+            "slug"
+          ]
+        },
+        {
+          "name": "landing_pages_updated_by_index",
+          "is_unique": false,
+          "columns": [
+            "updated_by"
+          ]
+        },
+        {
+          "name": "landing_pages_created_by_index",
+          "is_unique": false,
+          "columns": [
+            "created_by"
+          ]
+        },
+        {
+          "name": "landing_pages_event_id_slug_unique",
+          "is_unique": true,
+          "columns": [
+            "event_id",
+            "slug"
+          ]
+        },
+        {
+          "name": "landing_pages_event_id_index",
+          "is_unique": false,
+          "columns": [
+            "event_id"
+          ]
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "from_table": "audios",
+      "from_column": "updated_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "audios",
+      "from_column": "created_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "audios",
+      "from_column": "company_id",
+      "to_table": "companys",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "landing_pages",
+      "from_column": "updated_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "landing_pages",
+      "from_column": "created_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "landing_pages",
+      "from_column": "bg_mobile_id",
+      "to_table": "media",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "landing_pages",
+      "from_column": "bg_tablet_id",
+      "to_table": "media",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "landing_pages",
+      "from_column": "bg_desktop_id",
+      "to_table": "media",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "landing_pages",
+      "from_column": "footer_id",
+      "to_table": "media",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "landing_pages",
+      "from_column": "header_id",
+      "to_table": "media",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "landing_pages",
+      "from_column": "banner_id",
+      "to_table": "media",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "landing_pages",
+      "from_column": "event_id",
+      "to_table": "events",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    }
+  ],
+  "external_reference_tables": [
+    "companys",
+    "events",
+    "media",
+    "users"
+  ],
+  "stats": {
+    "table_count": 4,
+    "relationship_count": 12,
+    "column_count": 53
+  }
+}

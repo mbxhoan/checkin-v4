@@ -1,0 +1,2177 @@
+{
+  "domain": "shared_core",
+  "description": "Shared master data and identity/access tables.",
+  "generated_at_utc": "2026-02-25T06:54:37.841602+00:00",
+  "source": {
+    "type": "sqlite_from_laravel_migrations",
+    "database_path": "<temporary sqlite build>",
+    "notes": [
+      "Schema generated from top-level files in database/migrations.",
+      "database/migrations/tmp is intentionally excluded (Laravel default behavior).",
+      "Temporary migration copy was normalized for SQLite index compatibility only."
+    ]
+  },
+  "tables": [
+    {
+      "name": "client_backups",
+      "kind": "domain",
+      "description": "Business domain table: client backups.",
+      "column_count": 14,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "batch_key",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "event_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "country_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "org_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "event_code",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "qrcode",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "email",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "type",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "register_source",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "custom_fields",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": []
+    },
+    {
+      "name": "clients",
+      "kind": "domain",
+      "description": "Attendees/participants linked to events.",
+      "column_count": 23,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "event_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "event_code",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "ref_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "lp_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "qrcode",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "email",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "custom_fields",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'ACTIVE'",
+          "is_primary_key": false
+        },
+        {
+          "name": "created_by",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_by",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "img_qrcode",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "avatar",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "type",
+          "type": "varchar",
+          "nullable": true,
+          "default": "'NORMAL'",
+          "is_primary_key": false
+        },
+        {
+          "name": "document_pdf",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "register_source",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "country_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "lang",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "card_link_mobile",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "card_link_desktop",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "country_id",
+          "to_table": "countrys",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "event_id",
+          "to_table": "events",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "created_by",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "updated_by",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "clients_country_id_index",
+          "is_unique": false,
+          "columns": [
+            "country_id"
+          ]
+        },
+        {
+          "name": "clients_qrcode_index",
+          "is_unique": false,
+          "columns": [
+            "qrcode"
+          ]
+        },
+        {
+          "name": "clients_name_index",
+          "is_unique": false,
+          "columns": [
+            "name"
+          ]
+        },
+        {
+          "name": "clients_event_id_qrcode_unique",
+          "is_unique": true,
+          "columns": [
+            "event_id",
+            "qrcode"
+          ]
+        },
+        {
+          "name": "clients_event_id_index",
+          "is_unique": false,
+          "columns": [
+            "event_id"
+          ]
+        },
+        {
+          "name": "clients_event_code_index",
+          "is_unique": false,
+          "columns": [
+            "event_code"
+          ]
+        },
+        {
+          "name": "clients_email_index",
+          "is_unique": false,
+          "columns": [
+            "email"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "comments",
+      "kind": "domain",
+      "description": "Business domain table: comments.",
+      "column_count": 7,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "author_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "post_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "content",
+          "type": "TEXT",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "posted_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "post_id",
+          "to_table": "posts",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "CASCADE"
+        },
+        {
+          "from_column": "author_id",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "CASCADE"
+        }
+      ],
+      "indexes": []
+    },
+    {
+      "name": "companys",
+      "kind": "domain",
+      "description": "Organizations that own events and users.",
+      "column_count": 21,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'ACTIVE'",
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "is_default",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "limited_events",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "limited_clients",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "limited_emails",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "limited_users",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "limited_campaigns",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_by",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_by",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "code",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "license",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "languages",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "settings",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "devices",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "templates",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "senders",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "type",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "created_by",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "updated_by",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "companys_code_unique",
+          "is_unique": true,
+          "columns": [
+            "code"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "countrys",
+      "kind": "domain",
+      "description": "Country catalog.",
+      "column_count": 10,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "code",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "is_default",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "description",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "link_flag",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "alt",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'ACTIVE'",
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": []
+    },
+    {
+      "name": "language_defines",
+      "kind": "domain",
+      "description": "Localized key/value translations by event.",
+      "column_count": 10,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "event_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "language_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "keyword",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "translate",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "type",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'TEXT'",
+          "is_primary_key": false
+        },
+        {
+          "name": "value",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'ACTIVE'",
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "event_id",
+          "to_table": "events",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "language_id",
+          "to_table": "languages",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "language_defines_language_id_keyword_unique",
+          "is_unique": true,
+          "columns": [
+            "language_id",
+            "keyword"
+          ]
+        },
+        {
+          "name": "language_defines_language_id_index",
+          "is_unique": false,
+          "columns": [
+            "language_id"
+          ]
+        },
+        {
+          "name": "language_defines_event_id_index",
+          "is_unique": false,
+          "columns": [
+            "event_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "languages",
+      "kind": "domain",
+      "description": "Language catalog.",
+      "column_count": 9,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "description",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'ACTIVE'",
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "is_default",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "code",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "icon_path",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "languages_name_unique",
+          "is_unique": true,
+          "columns": [
+            "name"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "likes",
+      "kind": "domain",
+      "description": "Business domain table: likes.",
+      "column_count": 6,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "author_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "likeable_type",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "likeable_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "author_id",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "likes_likeable_type_likeable_id_index",
+          "is_unique": false,
+          "columns": [
+            "likeable_type",
+            "likeable_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "n8n_chat_messages",
+      "kind": "domain",
+      "description": "Messages inside n8n chat sessions.",
+      "column_count": 9,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "session_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "user_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "role",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "content",
+          "type": "TEXT",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "content_html",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "meta",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "session_id",
+          "to_table": "n8n_chat_sessions",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "CASCADE"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "n8n_chat_messages_user_id_id_index",
+          "is_unique": false,
+          "columns": [
+            "user_id",
+            "id"
+          ]
+        },
+        {
+          "name": "n8n_chat_messages_session_id_id_index",
+          "is_unique": false,
+          "columns": [
+            "session_id",
+            "id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "n8n_chat_sessions",
+      "kind": "domain",
+      "description": "n8n chat sessions.",
+      "column_count": 8,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "user_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'ACTIVE'",
+          "is_primary_key": false
+        },
+        {
+          "name": "mode",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'UNSET'",
+          "is_primary_key": false
+        },
+        {
+          "name": "started_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "closed_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "n8n_chat_sessions_created_at_index",
+          "is_unique": false,
+          "columns": [
+            "created_at"
+          ]
+        },
+        {
+          "name": "n8n_chat_sessions_user_id_status_index",
+          "is_unique": false,
+          "columns": [
+            "user_id",
+            "status"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "packages",
+      "kind": "domain",
+      "description": "Business domain table: packages.",
+      "column_count": 4,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "code",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "packages_code_unique",
+          "is_unique": true,
+          "columns": [
+            "code"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "posts",
+      "kind": "domain",
+      "description": "Business domain table: posts.",
+      "column_count": 9,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "author_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "title",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "content",
+          "type": "TEXT",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "posted_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "slug",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "thumbnail_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "thumbnail_id",
+          "to_table": "media",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "SET NULL"
+        },
+        {
+          "from_column": "author_id",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "CASCADE"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "posts_title_index",
+          "is_unique": false,
+          "columns": [
+            "title"
+          ]
+        },
+        {
+          "name": "posts_slug_unique",
+          "is_unique": true,
+          "columns": [
+            "slug"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "role_user",
+      "kind": "domain",
+      "description": "Business domain table: role user.",
+      "column_count": 5,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "user_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "role_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "role_id",
+          "to_table": "roles",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "user_id",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        }
+      ],
+      "indexes": []
+    },
+    {
+      "name": "roles",
+      "kind": "domain",
+      "description": "Business domain table: roles.",
+      "column_count": 4,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": []
+    },
+    {
+      "name": "settings",
+      "kind": "domain",
+      "description": "Business domain table: settings.",
+      "column_count": 5,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "value",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "settings_name_unique",
+          "is_unique": true,
+          "columns": [
+            "name"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "users",
+      "kind": "domain",
+      "description": "System users and profile/access metadata.",
+      "column_count": 34,
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": true
+        },
+        {
+          "name": "is_admin",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "is_checkout",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "gender",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": "'1'",
+          "is_primary_key": false
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "email",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "phone",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "title",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "position",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "password",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "last_login_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "remember_token",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "avatar",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "provider",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "provider_id",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "registered_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "email_verified_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "company_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "username",
+          "type": "varchar",
+          "nullable": false,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "permissions",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "type",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'WEB'",
+          "is_primary_key": false
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "nullable": false,
+          "default": "'INACTIVE'",
+          "is_primary_key": false
+        },
+        {
+          "name": "event_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "expire_date",
+          "type": "date",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "created_by",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "updated_by",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "gate",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "package_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "verify_token",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "session_id",
+          "type": "varchar",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        },
+        {
+          "name": "must_accept_terms",
+          "type": "tinyint(1)",
+          "nullable": false,
+          "default": "'0'",
+          "is_primary_key": false
+        },
+        {
+          "name": "terms_accepted_at",
+          "type": "datetime",
+          "nullable": true,
+          "default": null,
+          "is_primary_key": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from_column": "package_id",
+          "to_table": "packages",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "event_id",
+          "to_table": "events",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "SET NULL"
+        },
+        {
+          "from_column": "company_id",
+          "to_table": "companys",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "SET NULL"
+        },
+        {
+          "from_column": "created_by",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        },
+        {
+          "from_column": "updated_by",
+          "to_table": "users",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "users_verify_token_unique",
+          "is_unique": true,
+          "columns": [
+            "verify_token"
+          ]
+        },
+        {
+          "name": "users_package_id_index",
+          "is_unique": false,
+          "columns": [
+            "package_id"
+          ]
+        },
+        {
+          "name": "users_username_unique",
+          "is_unique": true,
+          "columns": [
+            "username"
+          ]
+        },
+        {
+          "name": "users_provider_id_unique",
+          "is_unique": true,
+          "columns": [
+            "provider_id"
+          ]
+        },
+        {
+          "name": "users_email_unique",
+          "is_unique": true,
+          "columns": [
+            "email"
+          ]
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "from_table": "audios",
+      "from_column": "updated_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "audios",
+      "from_column": "created_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "audios",
+      "from_column": "company_id",
+      "to_table": "companys",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "campaign_attachments",
+      "from_column": "updated_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "campaign_attachments",
+      "from_column": "created_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "campaigns",
+      "from_column": "updated_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "campaigns",
+      "from_column": "created_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "checkins",
+      "from_column": "user_id",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "CASCADE"
+    },
+    {
+      "from_table": "client_tickets",
+      "from_column": "client_id",
+      "to_table": "clients",
+      "to_column": "id",
+      "on_update": "CASCADE",
+      "on_delete": "SET NULL"
+    },
+    {
+      "from_table": "clients",
+      "from_column": "country_id",
+      "to_table": "countrys",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "clients",
+      "from_column": "event_id",
+      "to_table": "events",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "clients",
+      "from_column": "created_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "clients",
+      "from_column": "updated_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "comments",
+      "from_column": "post_id",
+      "to_table": "posts",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "CASCADE"
+    },
+    {
+      "from_table": "comments",
+      "from_column": "author_id",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "CASCADE"
+    },
+    {
+      "from_table": "companys",
+      "from_column": "created_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "companys",
+      "from_column": "updated_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "events",
+      "from_column": "assignee_id",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "SET NULL"
+    },
+    {
+      "from_table": "events",
+      "from_column": "updated_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "events",
+      "from_column": "created_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "events",
+      "from_column": "company_id",
+      "to_table": "companys",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "export_datas",
+      "from_column": "user_id",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "labels",
+      "from_column": "updated_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "labels",
+      "from_column": "created_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "landing_pages",
+      "from_column": "updated_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "landing_pages",
+      "from_column": "created_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "language_defines",
+      "from_column": "event_id",
+      "to_table": "events",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "language_defines",
+      "from_column": "language_id",
+      "to_table": "languages",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "likes",
+      "from_column": "author_id",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "lucky_draws",
+      "from_column": "updated_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "lucky_draws",
+      "from_column": "created_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "n8n_chat_messages",
+      "from_column": "session_id",
+      "to_table": "n8n_chat_sessions",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "CASCADE"
+    },
+    {
+      "from_table": "orders",
+      "from_column": "client_id",
+      "to_table": "clients",
+      "to_column": "id",
+      "on_update": "CASCADE",
+      "on_delete": "SET NULL"
+    },
+    {
+      "from_table": "posts",
+      "from_column": "thumbnail_id",
+      "to_table": "media",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "SET NULL"
+    },
+    {
+      "from_table": "posts",
+      "from_column": "author_id",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "CASCADE"
+    },
+    {
+      "from_table": "print_logs",
+      "from_column": "updated_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "print_logs",
+      "from_column": "created_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "role_user",
+      "from_column": "role_id",
+      "to_table": "roles",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "role_user",
+      "from_column": "user_id",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "smss",
+      "from_column": "client_id",
+      "to_table": "clients",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "summerizes",
+      "from_column": "updated_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "summerizes",
+      "from_column": "created_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "users",
+      "from_column": "package_id",
+      "to_table": "packages",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "users",
+      "from_column": "event_id",
+      "to_table": "events",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "SET NULL"
+    },
+    {
+      "from_table": "users",
+      "from_column": "company_id",
+      "to_table": "companys",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "SET NULL"
+    },
+    {
+      "from_table": "users",
+      "from_column": "created_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    },
+    {
+      "from_table": "users",
+      "from_column": "updated_by",
+      "to_table": "users",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION"
+    }
+  ],
+  "external_reference_tables": [
+    "audios",
+    "campaign_attachments",
+    "campaigns",
+    "checkins",
+    "client_tickets",
+    "events",
+    "export_datas",
+    "labels",
+    "landing_pages",
+    "lucky_draws",
+    "media",
+    "orders",
+    "print_logs",
+    "smss",
+    "summerizes"
+  ],
+  "stats": {
+    "table_count": 16,
+    "relationship_count": 47,
+    "column_count": 178
+  }
+}

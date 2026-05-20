@@ -1,0 +1,20 @@
+.bg-theme {
+    background-color: $theme-color-light;
+    color: $mainmenu-text-color !important;
+}
+
+.bg-dark-theme {
+    background-color: $theme-color;
+}
+
+.bg-gradient-blue {
+    background: rgb(231, 244, 252);
+    background: linear-gradient(180deg,
+            rgb(231, 244, 252) 0%,
+            /* light baby blue */
+            rgb(244, 251, 255) 50%,
+            /* lighter tint */
+            rgba(255, 255, 255, 1) 100%
+            /* white at the bottom */
+        );
+}

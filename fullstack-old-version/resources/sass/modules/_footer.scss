@@ -1,0 +1,39 @@
+/* Fixed footer */
+.footer-fixed {
+    position: fixed;
+    bottom: 0;
+    left: 250px; /* same as sidebar width */
+    right: 0;
+    height: 60px;
+    background: #f8f9fa;
+    border-top: 1px solid #ddd;
+    // display: flex;
+    // align-items: center;
+    // justify-content: flex-end;
+    padding: 0 20px;
+    z-index: 999;
+}
+
+// .footer-fixed button {
+//     padding: 10px 20px;
+//     border: none;
+//     border-radius: 6px;
+//     background: #007bff;
+//     color: white;
+//     cursor: pointer;
+// }
+
+// .footer-fixed button:hover {
+//     background: #0056b3;
+// }
+.footer-fixed .btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: #fff;
+    border-color: #6c757d;
+}
+
+.footer-fixed .btn-outline-primary:hover {
+    background-color: #0d6efd;
+    color: #fff;
+    border-color: #0d6efd;
+}

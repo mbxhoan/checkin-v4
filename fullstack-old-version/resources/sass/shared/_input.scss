@@ -1,0 +1,12 @@
+.date-input {
+    position: relative;
+}
+.date-input input[type="date"]:before {
+    content: attr(placeholder);
+    position: absolute;
+    left: 10px;
+    color: #999;
+}
+.date-input input[type="date"]:valid:before {
+    content: "";
+}
